@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualisasi Pengeluaran & Anggaran</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-wrapper">
+
+        <!-- Header -->
+        <header class="header">
+            <h1>💰 Budget Tracker</h1>
+            <button id="toggle-dark" class="btn-icon" title="Toggle Dark Mode">🌙</button>
+        </header>
+
+        <!-- Saldo Total -->
+        <section class="balance-card">
+            <p class="balance-label">Saldo Total</p>
+            <h2 id="total-balance">Rp 0</h2>
+        </section>
+
+        <!-- Ringkasan Bulanan -->
+        <section class="monthly-summary card">
+            <h3>📅 Ringkasan Bulan Ini</h3>
+            <p>Total Pengeluaran: <strong id="monthly-total">Rp 0</strong></p>
+            <div id="monthly-by-category"></div>
+        </section>
+
+        <!-- Form Input -->
+        <section class="form-card card">
+            <h3>➕ Tambah Transaksi</h3>
+            <form id="transaction-form">
+                <div class="form-group">
+                    <label for="item-name">Nama Barang</label>
+                    <input type="text" id="item-name" placeholder="Contoh: Nasi Goreng" required>
+                </div>
+                <div class="form-group">
+                    <label for="item-amount">Jumlah (Rp)</label>
+                    <input type="number" id="item-amount" placeholder="Contoh: 15000" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="item-category">Kategori</label>
+                    <select id="item-category" required>
+                        <option value="">-- Pilih Kategori --</option>
+                        <option value="Makanan">Makanan</option>
+                        <option value="Transportasi">Transportasi</option>
+                        <option value="Hiburan">Hiburan</option>
+                    </select>
+                </div>
+
+                <!-- Kategori Khusus -->
+                <div class="form-group">
+                    <label for="custom-category">Atau Tambah Kategori Baru</label>
+                    <div class="input-row">
+                        <input type="text" id="custom-category" placeholder="Nama kategori baru">
+                        <button type="button" id="add-category-btn" class="btn-secondary">Tambah</button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary">Tambah Transaksi</button>
+            </form>
+        </section>
+
+        <!-- Batas Pengeluaran -->
+        <section class="budget-limit card">
+            <h3>⚠️ Batas Pengeluaran per Kategori</h3>
+            <div id="limit-list"></div>
+            <div class="form-group">
+                <div class="input-row">
+                    <select id="limit-category">
+                        <option value="">-- Pilih Kategori --</option>
+                        <option value="Makanan">Makanan</option>
+                        <option value="Transportasi">Transportasi</option>
+                        <option value="Hiburan">Hiburan</option>
+                    </select>
+                    <input type="number" id="limit-amount" placeholder="Batas (Rp)" min="1">
+                    <button type="button" id="set-limit-btn" class="btn-secondary">Set</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grafik -->
+        <section class="chart-card card">
+            <h3>📊 Grafik Pengeluaran</h3>
+            <div class="chart-container">
+                <canvas id="expense-chart"></canvas>
+            </div>
+            <p id="chart-empty" class="empty-msg">Belum ada data untuk ditampilkan.</p>
+        </section>
+
+        <!-- Daftar Transaksi -->
+        <section class="list-card card">
+            <div class="list-header">
+                <h3>📋 Riwayat Transaksi</h3>
+                <select id="sort-select">
+                    <option value="newest">Terbaru</option>
+                    <option value="oldest">Terlama</option>
+                    <option value="highest">Tertinggi</option>
+                    <option value="lowest">Terendah</option>
+                </select>
+            </div>
+            <ul id="transaction-list"></ul>
+            <p id="list-empty" class="empty-msg">Belum ada transaksi.</p>
+        </section>
+
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
